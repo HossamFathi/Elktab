@@ -1,0 +1,179 @@
+﻿@model Elktab.Models.BookDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+<link rel="stylesheet" href="~/css/Details.css" />
+
+<div class="blog-single gray-bg">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-8 m-15px-tb">
+                <article class="article">
+                    <div class="article-img">
+                        <img src="~/img/Book1.jpg" title="" alt="">
+                    </div>
+                    <div class="article-title">
+                        <div class="container row">
+                            <h2> @Model.Name</h2>
+                            <div class="container col-lg-4 col-md-6 col-sm-10 text-center" style="padding:0.8rem">
+                                <ul class="row rating" style="list-style:none">
+                                    @for (int i = 5; i > 0; i--)
+                                    {
+
+                                        if (Model.Rate > 0)
+                                        {
+
+                                            <li><i class="fa fa-star"></i></li>
+                                            Model.Rate--;
+                                        }
+                                        else
+                                        {
+                                            <li><i class="fa fa-star-o"></i></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="media">
+                            <div class="avatar">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" title="" alt="">
+                            </div>
+                            <div class="media-body">
+                                <label>Rachel Roth</label>
+                                <span>26 FEB 2020</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <!--Review -->
+
+                        <h4>Review : </h4>
+                        <p>@Model.Description</p>
+                        <!--Learned Lesson -->
+                        <blockquote>
+                            <p class="blockquote-footer">
+                                Learned Lessons :
+                            </p>
+                            <ul>
+                               @foreach (var Lesson in Model.lessonslearned)
+                               {
+                                   <li>@Lesson.Description</li>
+                               }
+                            </ul>
+                        </blockquote>
+                        <!--Important Tips  -->
+
+                        <blockquote>
+                            @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>*@
+                            <p class="blockquote-footer">Important Tips</p>
+                            <ul>
+                                @foreach (var Tips in Model.ImportantTips)
+                                {
+                                    <li>@Tips.Tips</li>
+                                }
+                            </ul>
+                        </blockquote>
+                        <blockquote>
+                            <p class="blockquote-footer">
+                                Level  : <span style="color:black"> @Model.Level </span>
+                            </p>
+                           
+                        </blockquote>
+                    </div>
+                
+                </article>
+                <div class="contact-form article-comment">
+                    <h4>Leave a Reply</h4>
+                    <form id="contact-form" method="POST">
+                        <div class="row">
+                            @*<div class="col-md-6">
+                                <div class="form-group">
+                                    <input name="Name" id="name" placeholder="Name *" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input name="Email" id="email" placeholder="Email *" class="form-control" type="email">
+                                </div>
+                            </div>*@
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea name="message" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="send">
+                                    <button class="px-btn theme"><span>Submit</span> <i class="arrow"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 m-15px-tb blog-aside">
+                <!-- Author -->
+                <div class="widget widget-author">
+                    <div class="widget-title">
+                        <h3>Author</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="media align-items-center">
+                            <div class="avatar">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" title="" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h6>Mohamed ALI</h6>
+                            </div>
+                        </div>
+                        <p>I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores</p>
+                    </div>
+                </div>
+                <!-- End Author -->
+           
+                <!-- Explanation  -->
+                <div class="widget widget-latest-post">
+                    
+                    <div class="widget-title row">
+                        <h3 class="col-10">Explanations</h3>
+                        <a href="/" class="col-2 text-center" style="font-weight: bold; font-size: 24px; margin-top: -5px">+</a>
+                    </div>
+                    <div class="widget-body">
+                        <div class="latest-post-aside media">
+                            <div class="lpa-left media-body">
+                                <div class="lpa-title">
+                                    <h5><a href="#">Explanation of the data science book</a></h5>
+                                </div>
+                                <div class="lpa-meta">
+                                    <a class="name" href="#">
+                                        Mohamed Ali
+                                    </a>
+                                    <a class="date">
+                                        26 FEB 2021
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+                </div>
+                <!-- End Explanation  -->
+                <!-- widget Tags -->
+                <div class="widget widget-tags">
+                    <div class="widget-title">
+                        <h3> Tags</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="nav tag-cloud">
+                            <a asp-controller="categories" asp-action="index">@Model.Category.Name</a>
+                            <a asp-controller="books" asp-action="search" asp-route-data="">@Model.Level</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End widget Tags -->
+            </div>
+        </div>
+    </div>
+</div>

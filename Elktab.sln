@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elktab", "Elktab\Elktab.csproj", "{80F6E787-577E-4754-BBE1-72D38BE8290A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80F6E787-577E-4754-BBE1-72D38BE8290A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F6E787-577E-4754-BBE1-72D38BE8290A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F6E787-577E-4754-BBE1-72D38BE8290A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F6E787-577E-4754-BBE1-72D38BE8290A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A1760E4-9443-4662-A73C-5FE1EE590FA0}
+	EndGlobalSection
+EndGlobal

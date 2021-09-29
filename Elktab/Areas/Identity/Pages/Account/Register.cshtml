@@ -1,0 +1,54 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "ElKtab";
+}
+
+
+
+
+<div class="col-12 row mt-5 ">
+
+    <section class="col-lg-6 col-md-6 shadow container mb-5" style="padding:1.5rem;">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+          
+            <div class="form-group">
+                <label asp-for="Input.Name"></label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-info col-4">Regiester</button>
+                <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" style="text-align:end"> <button type="button" class="btn btn-success col-7">I have an account</button></a>
+            </div>
+
+        </form>
+    </section>
+    <div class="col-lg-5 col-md-6 text-center" style="padding-top:10%">
+        <h4 style="color: #177db8; font-family: cursive; ">@ViewData["Title"]</h4>
+
+        <p style="color: #1e4f7a"> Make you review book easer and chack reviews before read any book </p>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

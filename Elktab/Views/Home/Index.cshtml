@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Elktab.Models.BookDTO>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/index.css" />
+
+<div id="myCarousel" class="carousel slide " data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+
+    </ol>
+    <div class="carousel-inner col-lg-12 col-md-6 col-sm-10">
+        <div class="carousel-item text-center active">
+            <img class="first-slide col-lg-10 col-md-10 col-sm-10 img" src="/img/Book1.jpg" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption text-center">
+                    <h3>Review</h3>
+                    <p>Review Book to help other to have alote of experience </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item text-center ">
+            <img class="first-slide col-lg-10 col-md-10 col-sm-10 img" src="/img/Book2.jpg" alt="First slide" style="">
+            <div class="container">
+                <div class="carousel-caption text-center">
+                    <h3>Review</h3>
+                    <p>Review Book to help other to have alote of experience </p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="color:blue"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+@* Search *@
+<div class="container shadow col-lg-12 search mb-3 mt-3">
+    <form asp-controller="Books" asp-action="Search" method="get">
+        <div class="form-group row text-center">
+            <input class="form-control col-lg-9 col-md-6 mb-2 ml-2" type="text" name="BookName" placeholder="Enter Book Name " />
+            <input class="btn btn-info form-control col-lg-2 col-md-6 ml-2" type="submit" value="Search" />
+        </div>
+    </form>
+</div>
+
+
+
+<!--For Page-->
+<div class="page">
+    <!--For Row containing all card-->
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-10">
+                <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                    <!--Card image-->
+                    <div class="view view-cascade overlay text-center">
+                        <img class="card-img-top" src="/img/Book2.jpg" alt=""><a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <!--Card Body-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Card Title-->
+                        <h4 class="card-title"><strong><a asp-controller="books" asp-action="Details" asp-route-id="@book.ID">@book.Name</a></strong></h4> <!-- Card Description-->
+                        <p class="card-text"> @book.Description</p>
+                        @*<p class="price">$50</p>*@ <!-- Card Rating-->
+                        <ul class="row rating" style="list-style:none">
+                            @for (int i = 5; i > 0; i--)
+                            {
+
+                                if (book.Rate > 0)
+                                {
+
+                                    <li><i class="fa fa-star"></i></li>
+                                    book.Rate--;
+                                }
+                                else
+                                {
+                                    <li><i class="fa fa-star-o"></i></li>
+                                }
+                            }
+                        </ul>
+                        <!--Card footer-->
+                        <a asp-controller="books" asp-action="Details" asp-route-id="@book.ID"> <div class="card-footer btn-info" style="cursor:pointer">
+                            <p>Read More</p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                            }
+      
+    </div>
+</div>
+
+@section Scripts{
+
+
+
+}

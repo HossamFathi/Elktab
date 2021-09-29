@@ -1,0 +1,161 @@
+﻿@model Elktab.Models.BookDTO
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+
+<link rel="stylesheet" href="~/css/Details.css" />
+<div class="contact-form article-comment">
+    <h4>Create New Book </h4>
+    <form asp-action="Create" class="contact-form">
+        <div class="row">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Rate" class="control-label"></label>
+                    <input asp-for="Rate" class="form-control" />
+                    <span asp-validation-for="Rate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @*<label asp-for="Description" class="control-label"></label>*@
+
+                    <textarea asp-for="Description" id="message" placeholder="Your Review *" rows="4" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Level" class="control-label"></label>
+                    <select asp-for="Level" class="form-control" asp-items="Html.GetEnumSelectList<Elktab.Data.context.LevelEnum>()">
+                        <option selected disabled>Please select</option>
+                    </select>
+
+
+                    <span asp-validation-for="Level" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="CategoryID" class="control-label"></label>
+                    <select asp-for="CategoryID" class="form-control"
+                            asp-items="@(new SelectList(Model.categories,"ID","Name"))">
+                        <option selected disabled>Please select one</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ImportantTips" class="control-label "></label>
+                   <button type="button" class="btn btn-info" style="text-align:end;float:right" id="AddTips">+</button>
+                 
+                    <div class="form-group" id="ImportantTips">
+                        <input class="form-control" name="ImportantTips" placeholder="add Tips" />
+                    </div>
+                    <span asp-validation-for="ImportantTips" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="lessonslearned" class="control-label"></label>
+                    <button type="button" class="btn btn-info" style="text-align:end;float:right" id="AddLesson">+</button>
+                    <div class="form-group" id="lessonslearned">
+                        <input class="form-control" name="lessonslearned" placeholder="add lesson" />
+                    </div>
+                    <span asp-validation-for="ImportantTips" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="form-group row col-lg-12 col-md-6">
+                    <div class="col-lg-6" style="width:70%">
+                        <a asp-controller="books" asp-action="index"> <button type="button" class="px-btn-left theme"><span>Back To List </span> <i class="arrow"></i></button></a>
+                    </div>
+                    <div class="col-lg-6  " style="text-align:end;width:30%">
+
+                        <button type="submit" id="Submitbtn" class="px-btn theme"><span>Create</span> <i class="arrow"></i></button>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+
+
+            $('#AddTips').on("click", function () {
+                var TipsInput = "<input class='form-control mt-3' name='ImportantTips' placeholder='add Tips' />";
+
+
+                $('#ImportantTips').append(TipsInput);
+
+
+            });
+            $('#AddLesson').on("click", function () {
+                var Lesson = "<input class='form-control mt-3' name='lessonslearned' placeholder='add lesson' />";
+
+
+                $('#lessonslearned').append(Lesson);
+
+
+            });
+
+            $('#Submitbtn').on("click", function () {
+
+                var Tips = $('input[name*="ImportantTips"]');
+                var counter = 0;
+                $.each(Tips, function (index, value) {
+
+                    if (!$(this).val()) {
+                        this.remove();
+                        index++;
+                        return;
+                    }
+                    value.name = 'ImportantTips[' + counter + '].Tips';
+                    counter++;
+                });
+                var lessons = $('input[name*="lessonslearned"]');
+                counter = 0;
+                $.each(lessons, function (index, value) {
+
+                    if (!$(this).val()) {
+                        this.remove();
+                        index++;
+                        return;
+                    }
+                    value.name = 'lessonslearned[' + counter + '].Description';
+                    counter++;
+                });
+
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Elktab.Models.BookDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/css/index.css" />
+<div class="col-12 m-4" style="text-align: -webkit-center ">
+    <div class="text-center  col-3 mb-3 mt-3" style="border-left: 1px solid #17a2b8; border-right: 1px solid #17a2b8 ">
+        <h1>Books</h1>
+    </div>
+</div>
+@* Search *@
+<div class="container shadow col-lg-12 search mb-3 mt-3">
+    <form asp-controller="Books" asp-action="Search" method="get">
+        <div class="form-group row text-center">
+            <input class="form-control col-lg-9 col-md-6 mb-2 ml-2" type="text" name="BookName" placeholder="Enter Book Name " />
+            <input class="btn btn-info form-control col-lg-2 col-md-6 ml-2" type="submit" value="Search" />
+        </div>
+    </form>
+</div>
+
+<!--For Page-->
+<div class="page">
+    <!--For Row containing all card-->
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-10">
+            <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                <!--Card image-->
+                <div class="view view-cascade overlay text-center">
+                    <a asp-controller="books" asp-action="create">
+                        <img class="card-img-top" src="/img/Add-Book.png" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <!--Card Body-->
+                <div class="card-body card-body-cascade text-center">
+                    <p class="card-text" style="min-height: 175px;max-height: 175px;"> </p>
+                    <!--Card footer-->
+                    <a asp-controller="books" asp-action="create" >
+                        <div class="card-footer btn-info" style="cursor:pointer">
+                            <p>Add New Book</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        @foreach (var book in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-10">
+                <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                    <!--Card image-->
+                    <div class="view view-cascade overlay text-center">
+                        <img class="card-img-top" src="/img/Book2.jpg" alt=""><a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <!--Card Body-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Card Title-->
+                        <h4 class="card-title"><strong><a asp-controller="books" asp-action="Details" asp-route-id="@book.ID">@book.Name</a></strong></h4> <!-- Card Description-->
+                        <p class="card-text"> @book.Description</p>
+                        @*<p class="price">$50</p>*@ <!-- Card Rating-->
+                        <ul class="row rating" style="list-style:none">
+                            @for (int i = 5; i > 0; i--)
+                            {
+
+                                if (book.Rate > 0)
+                                {
+
+                                    <li><i class="fa fa-star"></i></li>
+                                    book.Rate--;
+                                }
+                                else
+                                {
+                                    <li><i class="fa fa-star-o"></i></li>
+                                }
+                            }
+                        </ul>
+                        <!--Card footer-->
+                        <a asp-controller="books" asp-action="Details" asp-route-id="@book.ID">
+                            <div class="card-footer btn-info" style="cursor:pointer">
+                                <p>Read More</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
